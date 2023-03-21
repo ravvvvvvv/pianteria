@@ -1,0 +1,8 @@
+Models: {
+  Piante,
+  Ordini,
+  Ordini_fornitore,
+  Adozione,
+  Punto_ritiro,
+  Fornitore
+}
