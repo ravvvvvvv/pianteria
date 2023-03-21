@@ -4,5 +4,44 @@ Models: {
   Ordini_fornitore,
   Adozione,
   Punto_ritiro,
-  Fornitore
+  Fornitore,
+  Utente
+}
+
+API: {
+
+  piante: {
+    getArchivePianta,
+    getPianta,
+    createPianta,
+    modifyPianta,
+    deactivatePianta
+  },
+  Ordine: {
+    getArchiveOrder,
+    getOrder,
+    modifyOrderStatus
+  },
+  Ordine_fornitore: {
+    getArchiveOrderFornitore,
+    getOrderFornitore,
+    createOrderForitore,
+    modifyOrderFornitoreStatus
+  },
+  Adozione: {
+    getArchiveAdozione,
+    getAdozione
+  },
+  Punto_ritiro: {
+    getArchivePuntoRitiro,
+    getPuntoRitiro
+  },
+  Fornitore: {
+    getArchiveFornitore,
+    getFornitore
+  },
+  Utente: {
+    login,
+    registra,
+  }
 }
