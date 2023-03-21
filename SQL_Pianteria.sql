@@ -97,3 +97,9 @@ add foreign key (id_punto_ritiro) references punto_ritiro(id);
 
 alter table ordine
 add foreign key (id_user) references utente(id);
+
+alter table pianta
+add column inizio_raccolto date;
+
+alter table pianta
+add column fine_raccolto date;
