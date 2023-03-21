@@ -1,0 +1,77 @@
+INSERT INTO pianteria.fornitore (nome,email,telefono) VALUES
+	 ('Floricoltura','floricoltura@gmail.com','5431238908'),
+	 ('Florovivaismo','florovivaismo@gmail.com','9043235674'),
+	 ('Farmagricola','farmagricola@gmail.com','3619097845'),
+	 ('Agriflor','agriflor@gmail.com','7222244334'),
+	 ('Garden Mondo','gardenmondo@gmail.com','4354444230');
+
+
+INSERT INTO pianteria.adozioni (id_pianta,id_user,quantity,punto_ritiro) VALUES
+	 (2,3,3,4),
+	 (3,2,4,5),
+	 (1,5,2,2),
+	 (4,1,5,1),
+	 (5,4,2,3);
+
+
+INSERT INTO pianteria.ordine (id_user,data_acquisto,data_ritiro,id_punto_ritiro) VALUES
+	 (1,'2020-12-02','2021-01-05',2),
+	 (3,'2022-03-23','2022-04-06',4),
+	 (5,'2021-05-04','2021-07-01',3),
+	 (2,'2019-03-12','2019-04-10',5),
+	 (4,'2020-07-08','2020-07-28',1);
+
+
+INSERT INTO pianteria.ordine_fornitore (id_pianta,id_fornitore,quantità,data_ordine,data_arrivo,id_user) VALUES
+	 (1,2,23,'2020-03-02','2020-04-05',2),
+	 (2,5,54,'2021-05-05','2021-05-29',3),
+	 (3,4,43,'2019-08-01','2019-09-04',5),
+	 (4,1,76,'2022-07-03','2022-08-19',4),
+	 (5,3,17,'2018-05-03','2018-05-28',1);
+
+
+INSERT INTO pianteria.pianta (nome,nome_scientifico,fiore,colore1,colore2,prezzo,quantità,adottabile,prezzo_adozione,inizio_raccolto) VALUES
+	 ('alloro','Laurus nobilis',2,'#008000','#008000',15.0,54,1,12,NULL),
+	 ('falsa ortica purpurea','Lamium purpureum',1,'#008000','#C58F9D',10.0,23,1,8,NULL),
+	 ('tulipano','Tulipa',1,'#ff0000','#ffa500',12.0,44,1,10,NULL),
+	 ('gelsomino','Jasminum',1,'#ffffff','#ffffff',8.0,76,1,6,NULL),
+	 ('kenzia','Howea',2,'#008000','#008000',13.0,66,1,11,NULL);
+
+
+INSERT INTO pianteria.pianta_ordine (id_pianta,id_ordine,quantità) VALUES
+	 (2,3,23),
+	 (3,4,67),
+	 (1,5,34),
+	 (4,1,98),
+	 (5,2,56);
+
+
+INSERT INTO pianteria.pianta_stagione (id_pianta,id_stagione) VALUES
+	 (5,2),
+	 (1,2),
+	 (4,3),
+	 (3,2),
+	 (2,4);
+
+
+INSERT INTO pianteria.utente (username,email,password,livello_permessi) VALUES
+	 ('MarcelloAllegrezza','Marcello@gmail.com','Marcello',0),
+	 ('RiccardoBarchi','riccardo@gmail.com','Riccardo',0),
+	 ('LeonardoSecchiero','leonardo@gmail.com','Leonardo',0),
+	 ('admin','admin@gmail.com','admin',0),
+	 ('FormeBotanico','formebotanico@gmail.com','forme',0);
+
+
+INSERT INTO pianteria.stagione (nome) VALUES
+	 ('inverno'),
+	 ('primavera'),
+	 ('estate'),
+	 ('autunno');
+
+
+INSERT INTO pianteria.punto_ritiro (nome,indirizzo) VALUES
+	 ('Floricoltura Rovigo','via de Gasperi 45'),
+	 ('Azienda Vivaistica Rosolina','via della Pace 87'),
+	 ('Spaccio Piante Belluno','via della Memoria 12'),
+	 ('Vivai Lendinara','via Roma 115'),
+	 ('TuttoGiardino','via Lunga 34');
