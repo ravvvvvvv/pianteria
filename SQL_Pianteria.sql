@@ -32,7 +32,7 @@ email nvarchar(30) not null,
 telefono nvarchar(14) not null
 );
 
-create table ordine_fornitore(
+create table rifornimento(
 id int auto_increment primary key,
 id_pianta int not null,
 id_fornitore int not null,
@@ -77,13 +77,13 @@ add foreign key (id_pianta) references pianta(id);
 alter table pianta_stagione 
 add foreign key (id_stagione) references stagione(id);
 
-alter table ordine_fornitore
+alter table rifornimento
 add foreign key (id_pianta) references pianta(id);
 
-alter table ordine_fornitore
+alter table rifornimento
 add foreign key (id_fornitore) references fornitore(id);
 
-alter table ordine_fornitore 
+alter table rifornimento 
 add foreign key (id_user) references utente(id);
 
 alter table pianta_ordine
