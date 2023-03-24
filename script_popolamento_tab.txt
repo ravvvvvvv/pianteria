@@ -22,7 +22,7 @@ INSERT INTO pianteria.ordine (id_user,data_acquisto,data_ritiro,id_punto_ritiro)
 	 (4,'2020-07-08','2020-07-28',1);
 
 
-INSERT INTO pianteria.ordine_fornitore (id_pianta,id_fornitore,quantità,data_ordine,data_arrivo,id_user) VALUES
+INSERT INTO pianteria.rifornimento (id_pianta,id_fornitore,quantità,data_ordine,data_arrivo,id_user) VALUES
 	 (1,2,23,'2020-03-02','2020-04-05',2),
 	 (2,5,54,'2021-05-05','2021-05-29',3),
 	 (3,4,43,'2019-08-01','2019-09-04',5),
