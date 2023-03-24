@@ -103,3 +103,20 @@ add column inizio_raccolto date;
 
 alter table pianta
 add column fine_raccolto date;
+
+create table adozioni(
+id int auto_increment primary key,
+id_pianta int not null,
+id_user int not null,
+quantity int not null,
+punto_ritiro int not null
+)
+
+alter table adozioni
+add foreign key (id_pianta) references pianta(id);
+
+alter table adozioni
+add foreign key (id_user) references utente(id);
+
+alter table adozioni
+add foreign key (punto_ritiro) references punto_ritiro(id);
