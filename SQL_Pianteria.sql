@@ -110,7 +110,7 @@ id_pianta int not null,
 id_user int not null,
 quantity int not null,
 punto_ritiro int not null
-)
+);
 
 alter table adozioni
 add foreign key (id_pianta) references pianta(id);
