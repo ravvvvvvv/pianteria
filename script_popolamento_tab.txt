@@ -14,12 +14,12 @@ INSERT INTO pianteria.adozioni (id_pianta,id_user,quantity,punto_ritiro) VALUES
 	 (5,4,2,3);
 
 
-INSERT INTO pianteria.ordine (id_user,data_acquisto,data_ritiro,id_punto_ritiro) VALUES
-	 (1,'2020-12-02','2021-01-05',2),
-	 (3,'2022-03-23','2022-04-06',4),
-	 (5,'2021-05-04','2021-07-01',3),
-	 (2,'2019-03-12','2019-04-10',5),
-	 (4,'2020-07-08','2020-07-28',1);
+INSERT INTO pianteria.ordine (id_user,data_acquisto,data_ritiro,id_punto_ritiro,stato) VALUES
+	 (1,'2020-12-02','2021-01-05',2,1),
+	 (3,'2022-03-23','2022-04-06',4,2),
+	 (5,'2021-05-04','2021-07-01',3,3),
+	 (2,'2019-03-12','2019-04-10',5,4),
+	 (4,'2020-07-08','2020-07-28',1,1);
 
 
 INSERT INTO pianteria.rifornimento (id_pianta,id_fornitore,quantità,data_ordine,data_arrivo,id_user) VALUES
