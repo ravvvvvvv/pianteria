@@ -120,3 +120,7 @@ add foreign key (id_user) references utente(id);
 
 alter table adozioni
 add foreign key (punto_ritiro) references punto_ritiro(id);
+
+alter table ordine 
+add column stato int(4) not null;
+
