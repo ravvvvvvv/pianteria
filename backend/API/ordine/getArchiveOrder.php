@@ -5,9 +5,9 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Origin');
 
-$pianta = new Ordine();
+$ordine = new Ordine();
 
-$result = $pianta->getArchiveOrder();
+$result = $ordine->getArchiveOrder();
 
 if (empty($result)) {
     http_response_code(404);
