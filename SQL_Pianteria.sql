@@ -55,8 +55,7 @@ id int auto_increment primary key,
 id_user int not null,
 data_acquisto date not null,
 data_ritiro date not null,
-id_punto_ritiro int not null,
-stato int not null 
+id_punto_ritiro int not null
 );
 
 create table punto_ritiro(
