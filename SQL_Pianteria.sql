@@ -11,8 +11,7 @@ colore2 nvarchar(10) not null,
 prezzo double not null,
 quantità int not null,
 adottabile int not null,
-prezzo_adozione int not null,
-active int default(1) not null
+prezzo_adozione int not null
 );
 
 create table stagione(
