@@ -19,6 +19,7 @@ class Ordine
 
     public function getArchiveOrder() {
         $sql = "SELECT * FROM ordine WHERE 1=1";
+        
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
