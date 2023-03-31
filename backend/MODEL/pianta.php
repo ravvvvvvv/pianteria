@@ -78,4 +78,16 @@ class Pianta
 
         return $result;
     }
+    
+    public function modifyActivePianta($id_pianta, $active){
+        $sql = "UPDATE pianta p
+        SET stato_pianta = :active
+        where p.id = :id_pianta";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":active",$active,PDO::PARAM_INT);
+        $stmt->bindValue(":id_pianta",$id_pianta,PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }
