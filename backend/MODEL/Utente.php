@@ -35,7 +35,7 @@ class Utente
     }
 
     
-    public function registra($name, $email, $password, $livello_permessi)
+    public function registraUtente($username, $email, $password, $livello_permessi)
     {
         // Controllo se ci sono già altri utenti con la stessa mail
         $sql = "SELECT u.id
@@ -50,7 +50,7 @@ class Utente
         // Creo una variabile per contenere l'id dell'utente creato
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
-
+        $result = "utente gia presente";
         if ($stmt->rowCount() == 0)
         {
             // Aggiungo l'utente nella tabella user
@@ -58,14 +58,16 @@ class Utente
             values( :id, :username, :email, :`password`, :livello_permessi)";
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $stmt->bindValue(':username', $username, PDO::PARAM_STR);
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
             $stmt->bindValue(':password', $password, PDO::PARAM_STR);
             $stmt->bindValue(':livello_permessi', $livello_permessi, PDO::PARAM_STR);
             
-            $stmt->execute();
-            $utente = $this->conn->lastInsertId();
+            $result = $stmt->execute();
+            
+
         }
+        return $result;
     }
     
 }
