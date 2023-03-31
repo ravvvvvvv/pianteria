@@ -32,22 +32,34 @@ class Pianta
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
-    //Da finire
     public function createPianta($nome, $nome_scientifico, $fiore, $colore1, $colore2, $prezzo, $quantità, $adottabile, $prezzo_adozione, $inizio_raccolto, $fine_raccolto){
-        $sql = "INSERT INTO pianta (nome, nome_scientifico, fiore, colore1, colore2, prezzo, quantità, adottabile, prezzo_adozione, inizio_raccolto, fine_raccolto)
-                VALUES (:nome, :nome_scientifico, :fiore, :colore1, :colore2, :prezzo, :quantità, :adottabile, :prezzo_adozione, :inizio_raccolto, :fine_raccolto)";
+        if(empty($inizio_raccolto) && empty($fine_raccolto)){
+            $sql = "INSERT INTO pianta (nome, nome_scientifico, fiore, colore1, colore2, prezzo, quantità, adottabile, prezzo_adozione)
+                VALUES (:nome, :nome_scientifico, :fiore, :colore1, :colore2, :prezzo, :quantita, :adottabile, :prezzo_adozione)";
+        }else {
+            $sql = "INSERT INTO pianta (nome, nome_scientifico, fiore, colore1, colore2, prezzo, quantità, adottabile, prezzo_adozione, inizio_raccolto, :fine_raccolto)
+            VALUES (:nome, :nome_scientifico, :fiore, :colore1, :colore2, :prezzo, :quantita, :adottabile, :prezzo_adozione, :inizio_raccolto, :fine_raccolto)";
+        }
+        
         $stmt = $this->conn->prepare($sql);
+
         $stmt->bindValue(":nome",$nome,PDO::PARAM_STR);
         $stmt->bindValue(":nome_scientifico",$nome_scientifico,PDO::PARAM_STR);
         $stmt->bindValue(":fiore",$fiore,PDO::PARAM_INT);
         $stmt->bindValue(":colore1",$colore1,PDO::PARAM_STR);
         $stmt->bindValue(":colore2",$colore2,PDO::PARAM_STR);
         $stmt->bindValue(":prezzo",$prezzo,PDO::PARAM_STR);
-        $stmt->bindValue(":quantità",$quantità,PDO::PARAM_INT);
+        $stmt->bindValue(":quantita",$quantità,PDO::PARAM_INT);
         $stmt->bindValue(":adottabile",$adottabile,PDO::PARAM_INT);
-        $stmt->bindValue(":prezzo_adozione",$prezzo_adozione,PDO::PARAM_INT);
-        $stmt->bindValue(":inizio_raccolto",$inizio_raccolto,PDO::PARAM_STR);
-        $stmt->bindValue(":fine_raccolto",$fine_raccolto,PDO::PARAM_STR);
+        $stmt->bindValue(":prezzo_adozione",$prezzo_adozione,PDO::PARAM_STR);
+        
+        if(!empty($inizio_raccolto)){
+            $stmt->bindValue(":inizio_raccolto",$inizio_raccolto,PDO::PARAM_STR);
+        }
+        if(!empty($fine_raccolto)){
+            echo "COME";
+            $stmt->bindValue(":fine_raccolto",$fine_raccolto,PDO::PARAM_STR);
+        }
 
         return $stmt->execute();
     }
