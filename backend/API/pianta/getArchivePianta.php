@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../MODELS/pianta.php';
+require __DIR__ . '/../../MODEL/pianta.php';
 header("Content-type: application/json; charset=UTF-8");
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
