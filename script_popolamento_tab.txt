@@ -6,6 +6,49 @@ INSERT INTO pianteria.fornitore (nome,email,telefono) VALUES
 	 ('Garden Mondo','gardenmondo@gmail.com','4354444230');
 
 
+INSERT INTO pianteria.stagione (nome) VALUES
+	 ('inverno'),
+	 ('primavera'),
+	 ('estate'),
+	 ('autunno');
+	
+INSERT INTO pianteria.pianta (nome,nome_scientifico,fiore,colore1,colore2,prezzo,quantità,adottabile,prezzo_adozione,inizio_raccolto,fine_raccolto,stato_pianta) VALUES
+	 ('alloro','Laurus nobilis',2,'#008000','#008000',15.0,54,1,12,NULL,NULL,1),
+	 ('falsa ortica purpurea','Lamium purpureum',1,'#008000','#C58F9D',10.0,23,1,8,NULL,NULL,1),
+	 ('tulipano','Tulipa',1,'#ff0000','#ffa500',12.0,44,1,10,NULL,NULL,1),
+	 ('gelsomino','Jasminum',1,'#ffffff','#ffffff',8.0,76,1,6,NULL,NULL,1),
+	 ('kenzia','Howea',2,'#008000','#008000',13.0,66,1,11,NULL,NULL,1),
+	 ('alloro','Laurus nobilis',2,'#008000','#008000',15.0,54,1,12,NULL,NULL,1),
+	 ('falsa ortica purpurea','Lamium purpureum',1,'#008000','#C58F9D',10.0,23,1,8,NULL,NULL,1),
+	 ('tulipano','Tulipa',1,'#ff0000','#ffa500',12.0,44,1,10,NULL,NULL,1),
+	 ('gelsomino','Jasminum',1,'#ffffff','#ffffff',8.0,76,1,6,NULL,NULL,1),
+	 ('kenzia','Howea',2,'#008000','#008000',13.0,66,1,11,NULL,NULL,1);
+	
+	
+INSERT INTO pianteria.utente (username,email,password,livello_permessi) VALUES
+	 ('MarcelloAllegrezza','Marcello@gmail.com','Marcello',0),
+	 ('RiccardoBarchi','riccardo@gmail.com','Riccardo',0),
+	 ('LeonardoSecchiero','leonardo@gmail.com','Leonardo',0),
+	 ('admin','admin@gmail.com','admin',0),
+	 ('FormeBotanico','formebotanico@gmail.com','forme',0);
+	
+	
+INSERT INTO pianteria.pianta_stagione (id_pianta,id_stagione) VALUES
+	 (5,2),
+	 (1,2),
+	 (4,3),
+	 (3,2),
+	 (2,4);
+
+
+INSERT INTO pianteria.punto_ritiro (nome,indirizzo) VALUES
+	 ('Floricoltura Rovigo','via de Gasperi 45'),
+	 ('Azienda Vivaistica Rosolina','via della Pace 87'),
+	 ('Spaccio Piante Belluno','via della Memoria 12'),
+	 ('Vivai Lendinara','via Roma 115'),
+	 ('TuttoGiardino','via Lunga 34');
+	
+	
 INSERT INTO pianteria.adozioni (id_pianta,id_user,quantity,punto_ritiro) VALUES
 	 (2,3,3,4),
 	 (3,2,4,5),
@@ -30,54 +73,9 @@ INSERT INTO pianteria.rifornimento (id_pianta,id_fornitore,quantità,data_ordine
 	 (5,3,17,'2018-05-03','2018-05-28',1);
 
 
-INSERT INTO pianteria.pianta (nome,nome_scientifico,fiore,colore1,colore2,prezzo,quantità,adottabile,prezzo_adozione,inizio_raccolto,fine_raccolto,stato_pianta) VALUES
-	 ('alloro','Laurus nobilis',2,'#008000','#008000',15.0,54,1,12,NULL,NULL,1),
-	 ('falsa ortica purpurea','Lamium purpureum',1,'#008000','#C58F9D',10.0,23,1,8,NULL,NULL,1),
-	 ('tulipano','Tulipa',1,'#ff0000','#ffa500',12.0,44,1,10,NULL,NULL,1),
-	 ('gelsomino','Jasminum',1,'#ffffff','#ffffff',8.0,76,1,6,NULL,NULL,1),
-	 ('kenzia','Howea',2,'#008000','#008000',13.0,66,1,11,NULL,NULL,1),
-	 ('alloro','Laurus nobilis',2,'#008000','#008000',15.0,54,1,12,NULL,NULL,1),
-	 ('falsa ortica purpurea','Lamium purpureum',1,'#008000','#C58F9D',10.0,23,1,8,NULL,NULL,1),
-	 ('tulipano','Tulipa',1,'#ff0000','#ffa500',12.0,44,1,10,NULL,NULL,1),
-	 ('gelsomino','Jasminum',1,'#ffffff','#ffffff',8.0,76,1,6,NULL,NULL,1),
-	 ('kenzia','Howea',2,'#008000','#008000',13.0,66,1,11,NULL,NULL,1);
-
-
-
 INSERT INTO pianteria.pianta_ordine (id_pianta,id_ordine,quantità) VALUES
 	 (2,3,23),
 	 (3,4,67),
 	 (1,5,34),
 	 (4,1,98),
 	 (5,2,56);
-
-
-INSERT INTO pianteria.pianta_stagione (id_pianta,id_stagione) VALUES
-	 (5,2),
-	 (1,2),
-	 (4,3),
-	 (3,2),
-	 (2,4);
-
-
-INSERT INTO pianteria.utente (username,email,password,livello_permessi) VALUES
-	 ('MarcelloAllegrezza','Marcello@gmail.com','Marcello',0),
-	 ('RiccardoBarchi','riccardo@gmail.com','Riccardo',0),
-	 ('LeonardoSecchiero','leonardo@gmail.com','Leonardo',0),
-	 ('admin','admin@gmail.com','admin',0),
-	 ('FormeBotanico','formebotanico@gmail.com','forme',0);
-
-
-INSERT INTO pianteria.stagione (nome) VALUES
-	 ('inverno'),
-	 ('primavera'),
-	 ('estate'),
-	 ('autunno');
-
-
-INSERT INTO pianteria.punto_ritiro (nome,indirizzo) VALUES
-	 ('Floricoltura Rovigo','via de Gasperi 45'),
-	 ('Azienda Vivaistica Rosolina','via della Pace 87'),
-	 ('Spaccio Piante Belluno','via della Memoria 12'),
-	 ('Vivai Lendinara','via Roma 115'),
-	 ('TuttoGiardino','via Lunga 34');
