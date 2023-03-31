@@ -25,4 +25,14 @@ class Ordine
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getOrder($id_ordine) {
+        $sql = "SELECT * FROM ordine WHERE id = :id_ordine";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":id_ordine", $id_ordine,PDO::PARAM_INT);  
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
