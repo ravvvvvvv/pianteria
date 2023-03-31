@@ -19,13 +19,12 @@ class Ordine
 
     public function getArchiveOrder() {
         $sql = "SELECT * FROM ordine WHERE 1=1";
-        
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public function getOrder($id_ordine) {
         $sql = "SELECT * FROM ordine WHERE id = :id_ordine";
 
@@ -34,5 +33,16 @@ class Ordine
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function modifyStatoOrdine($id_ordine, $stato) {
+        $sql = "UPDATE ordine
+                SET stato = :stato
+                WHERE id = :id_ordine";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":stato", $stato,PDO::PARAM_INT);  
+        $stmt->bindValue(":id_ordine", $id_ordine,PDO::PARAM_INT);  
+        return $stmt->execute();
     }
 }
