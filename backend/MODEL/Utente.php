@@ -33,6 +33,53 @@ class Utente
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function deleteUtente($id_utente)
+    {
+        $utente = $this->getUtente($id_utente);
+
+        if ($utente == null)
+            return false;
+
+        $sql = "DELETE FROM Utente 
+        WHERE  id = :id_utente";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id_utente', $id_utente, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    public function getUtente($id_utente)
+    {
+        $sql = "SELECT u.username, u.email
+            FROM utente u
+            WHERE u.id = :id_utente";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id_utente', $id_utente, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function resetPassword($id_utente,$date)
+    {
+        // Generazione della password randomica
+        $password = bin2hex(openssl_random_pseudo_bytes(4));
+
+        $sql = "UPDATE utente
+        SET password = :password
+        WHERE id = :id_utente";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id_utente', $id_utente, PDO::PARAM_INT);
+        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $password;
+    }
 
     
     public function registraUtente($username, $email, $password, $livello_permessi)
