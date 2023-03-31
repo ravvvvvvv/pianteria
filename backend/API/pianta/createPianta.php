@@ -7,7 +7,7 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Origin'
 
 $data = json_decode(file_get_contents("php://input"));
 
-if(empty($data->nome) || empty($data->nome_scientifico) || empty($data->fiore) || empty($data->colore1) || empty($data->colore2) || empty($data->prezzo) || empty($data->quantità) || empty($data->adottabile) || empty($data->prezzo_adozione) || empty($data->active) || empty($data->stagione)){
+if(empty($data->nome) || empty($data->nome_scientifico) || empty($data->fiore) || empty($data->colore1) || empty($data->colore2) || empty($data->prezzo) || empty($data->quantità) || empty($data->adottabile) || empty($data->prezzo_adozione) || empty($data->stato_pianta) || empty($data->stagione)){
     http_response_code(404);
     echo json_encode(["message" => "Insert valid input"]);
     exit();
@@ -29,7 +29,7 @@ if(empty($data->fine_raccolto)){
 
 $pianta = new Pianta();
 
-$result = $pianta->createPianta($data->nome, $data->nome_scientifico, $data->fiore, $data->colore1, $data->colore2, $data->prezzo, $data->quantità, $data->adottabile, $data->prezzo_adozione, $inizio_raccolto, $fine_raccolto, $data->active, $data->stagione);
+$result = $pianta->createPianta($data->nome, $data->nome_scientifico, $data->fiore, $data->colore1, $data->colore2, $data->prezzo, $data->quantità, $data->adottabile, $data->prezzo_adozione, $inizio_raccolto, $fine_raccolto, $data->stato_pianta, $data->stagione);
 
 if ($result) {
     http_response_code(404);
