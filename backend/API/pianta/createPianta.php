@@ -31,9 +31,9 @@ $pianta = new Pianta();
 
 $result = $pianta->createPianta($data->nome, $data->nome_scientifico, $data->fiore, $data->colore1, $data->colore2, $data->prezzo, $data->quantità, $data->adottabile, $data->prezzo_adozione, $inizio_raccolto, $fine_raccolto);
 
-/*if ($result) {
+if ($result) {
     http_response_code(404);
 } else {
     http_response_code(200);
     echo json_encode($result);
-}*/
+}
