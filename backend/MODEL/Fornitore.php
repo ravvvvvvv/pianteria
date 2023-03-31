@@ -42,6 +42,41 @@ public function getFornitore($id_fornitore)
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function createFornitore($nome, $email, $telefono)
+    {
+         // Controllo se ci sono già altri utenti con la stessa mail
+         $sql = "SELECT f.id
+         FROM fornitore f
+         WHERE f.email = :email";
+ 
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+ 
+         $stmt->execute();
+ 
+         // Creo una variabile per contenere l'id dell'utente creato
+         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+         
+         $result = "fornitore gia presente";
+         if ($stmt->rowCount() == 0)
+         {
+             // Aggiungo il fornitore nella tabella fornitore
+             $sql = "INSERT into fornitore(id, nome, email, telefono)
+             values( :id, :nome, :email, :telefono)";
+ 
+             $stmt = $this->conn->prepare($sql);
+             $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
+             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+             $stmt->bindValue(':telefono', $telefono, PDO::PARAM_STR);
+
+             $result = $stmt->execute();
+             
+ 
+         }
+         return $result;
+     
+    }
 }
 
 
