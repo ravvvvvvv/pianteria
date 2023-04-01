@@ -127,3 +127,6 @@ add column stato_pianta int(1) not null;
 
 alter table ordine 
 add column stato int(4) not null;
+
+alter table fornitore 
+add column stato INT(1) not null;
