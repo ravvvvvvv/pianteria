@@ -1,10 +1,10 @@
-INSERT INTO pianteria.fornitore (nome,email,telefono) VALUES
-	 ('Floricoltura','floricoltura@gmail.com','5431238908'),
-	 ('Florovivaismo','florovivaismo@gmail.com','9043235674'),
-	 ('Farmagricola','farmagricola@gmail.com','3619097845'),
-	 ('Agriflor','agriflor@gmail.com','7222244334'),
-	 ('Garden Mondo','gardenmondo@gmail.com','4354444230');
-
+INSERT INTO pianteria.fornitore (nome,email,telefono,stato) VALUES
+	 ('Floricoltura','floricoltura@gmail.com','5431238908',1),
+	 ('Florovivaismo','florovivaismo@gmail.com','9043235674',2),
+	 ('Farmagricola','farmagricola@gmail.com','3619097845',2),
+	 ('Agriflor','agriflor@gmail.com','7222244334',2),
+	 ('Garden Mondo','gardenmondo@gmail.com','4354444230',2),
+	 ('marcy','Marcelloall@gmail.com','3914616987',2);
 
 INSERT INTO pianteria.stagione (nome) VALUES
 	 ('inverno'),
