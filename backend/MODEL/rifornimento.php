@@ -25,4 +25,14 @@ class Rifornimento
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getRifornimento($id_rifornimento) {
+        $sql = "SELECT * FROM rifornimento WHERE id = :id_rifornimento";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":id_rifornimento",$id_rifornimento,PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
