@@ -35,4 +35,19 @@ class Rifornimento
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    
+    public function createRifornimento($id_pianta, $id_fornitore, $quantità, $data_ordine, $data_arrivo, $id_user) {
+        $sql = "INSERT INTO rifornimento (id_pianta, id_fornitore, quantità, data_ordine, data_arrivo, id_user)
+                VALUES (:id_pianta, :id_fornitore, :quantita, :data_ordine, :data_arrivo, :id_user)";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":id_pianta",$id_pianta,PDO::PARAM_INT);
+        $stmt->bindValue(":id_fornitore",$id_fornitore,PDO::PARAM_INT);
+        $stmt->bindValue(":quantita",$quantità,PDO::PARAM_INT);
+        $stmt->bindValue(":data_ordine",$data_ordine,PDO::PARAM_STR);
+        $stmt->bindValue(":data_arrivo",$data_arrivo,PDO::PARAM_STR);
+        $stmt->bindValue(":id_user",$id_user,PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }
