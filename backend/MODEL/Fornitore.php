@@ -42,10 +42,27 @@ public function getFornitore($id_fornitore)
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function modifyFornitore($id_fornitore, $nome, $email, $telefono, $stato){
+            $sql = "UPDATE fornitore 
+            set nome = :nome, email = :email, telefono = :telefono, stato = :stato
+            where id = :id_fornitore";
+           
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->bindValue("id_fornitore",$id_fornitore,PDO::PARAM_INT);
+        $stmt->bindValue(":nome",$nome,PDO::PARAM_STR);
+        $stmt->bindValue(":email",$email,PDO::PARAM_STR);
+        $stmt->bindValue(":telefono",$telefono,PDO::PARAM_STR);
+        $stmt->bindValue(":stato",$stato,PDO::PARAM_INT);
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     public function createFornitore($nome, $email, $telefono)
     {
-         // Controllo se ci sono già altri fornitori con la stessa mail
+         // Controllo se ci sono già altri utenti con la stessa mail
          $sql = "SELECT f.id
          FROM fornitore f
          WHERE f.email = :email";
@@ -56,14 +73,14 @@ public function getFornitore($id_fornitore)
          $stmt->execute();
  
          // Creo una variabile per contenere l'id dell'utente creato
-         $fornitore = $stmt->fetch(PDO::FETCH_ASSOC);
+         $user = $stmt->fetch(PDO::FETCH_ASSOC);
          
          $result = "fornitore gia presente";
          if ($stmt->rowCount() == 0)
          {
              // Aggiungo il fornitore nella tabella fornitore
-             $sql = "INSERT into fornitore(nome, email, telefono)
-             values(:nome, :email, :telefono)";
+             $sql = "INSERT into fornitore(id, nome, email, telefono)
+             values( :id, :nome, :email, :telefono)";
  
              $stmt = $this->conn->prepare($sql);
              $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
@@ -71,9 +88,23 @@ public function getFornitore($id_fornitore)
              $stmt->bindValue(':telefono', $telefono, PDO::PARAM_STR);
 
              $result = $stmt->execute();
+             
+ 
          }
          return $result;
      
+    }
+
+    public function modifyActiveFornitore($id_fornitore, $active){
+        $sql = "UPDATE fornitore f
+        SET stato = :active
+        where f.id = :id_fornitore";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":active",$active,PDO::PARAM_INT);
+        $stmt->bindValue(":id_fornitore",$id_fornitore,PDO::PARAM_INT);
+
+        return $stmt->execute();
     }
 }
 
