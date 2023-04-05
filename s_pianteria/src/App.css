@@ -1,0 +1,169 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.logo {
+  text-decoration: none;
+  font-family: 'Open Sans';
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #000000;
+  transition: 0.1s ease-in-out;
+}
+
+.nav{
+  display: flex;
+  height: 140px;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #FFFFFF;
+  align-self: center;
+}
+
+.nav ul{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}.nav{
+  display: flex;
+  height: 140px;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #FFFFFF;
+  align-self: center;
+}
+
+.nav ul{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.nav li{
+  display: flex;
+  list-style: none;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: 25px;
+  margin-left: 25px;
+  position: relative;
+}
+
+.nav li a{
+  text-decoration: none;
+  font-family: 'Open Sans';
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #000000;
+  transition: 0.1s ease-in-out;
+}
+
+.nav li a:hover{
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+.nav li a.active{
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+.nav li a:hover::after, 
+.nav li a.active::after{
+  content: '';
+  width: 100%;
+  height: 20px;
+  background-color: #E9642C;
+  position: absolute;
+  left: 0px;
+  bottom: -25px;
+  border-radius: 30px;
+}
+
+.nav li{
+  display: flex;
+  list-style: none;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: 25px;
+  margin-left: 25px;
+  position: relative;
+}
+
+.nav li a{
+  text-decoration: none;
+  font-family: 'Open Sans';
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #000000;
+  transition: 0.1s ease-in-out;
+}
+
+.nav li a:hover{
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+.nav li a.active{
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+.nav li a:hover::after, 
+.nav li a.active::after{
+  content: '';
+  width: 100%;
+  height: 20px;
+  background-color: #E9642C;
+  position: absolute;
+  left: 0px;
+  bottom: -25px;
+  border-radius: 30px;
+}

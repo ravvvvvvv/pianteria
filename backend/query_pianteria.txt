@@ -1,0 +1,145 @@
+
+ piante: {
+--getArchivePianta
+select p.id as pid, p.nome as nome_pianta, p.prezzo as prezzo, p.fiore, p.nome_scientifico as nome_scientifico, p.colore1 as colore_1, p.colore2 as colore_2, p.quantità as quantity, p.adottabile as adottabilità, p.prezzo_adozione as prezzo_adozione, p.inizio_raccolto as raccolto_data_inizio, p.fine_raccolto as raccolto_data_fine, p.stato_pianta as stato_pianta
+        FROM pianta p
+        WHERE 1=1 
+        ORDER BY p.nome DESC;
+        
+--getPianta
+SELECT *
+FROM pianta p 
+WHERE p.id = "+ id
+
+
+--createPianta
+insert into pianta(id, nome, nome_scientifico, fiore, colore1, colore2, prezzo, quantità, adottabile, prezzo_adozione, inizio_raccolto, fine_raccolto, stato_pianta)
+values("+ id + "," + nome +"," + nome_scientifico +"," + fiore +","+ colore1 +","+ colore2 +","+ prezzo +","+ quantità +","+ adottabile +","+ prezzo_adozione +","+ inizio_raccolto +","+ fine_raccolto +","+ stato_pianta +")";
+
+
+--modifyPianta
+UPDATE pianta 
+set id = "+ id +", nome = "+ nome +", nome_scientifico = "+ nome_scientifico +", fiore = "+ fiore+ ", colore1 = "+ colore1 +" , colore2 = "+ colore2 +", prezzo = "+ prezzo +", quantità = "+ quantità +", adottabile = "+ adottabile +", prezzo_adozione = "+ prezzo_adozione +", inizio_raccolto = "+ inizio_raccolto +", fine_raccolto = "+ fine_raccolto +" 
+where id = "+ id
+
+--deactivatePianta
+UPDATE pianta p
+SET stato_pianta = 0
+where p.id = "+ i
+
+
+}
+
+ Ordine: {
+ 
+--getArchiveOrder
+select u.username,u.id, o.id, o.id_user, o.data_acquisto, o.data_ritiro, o.id_punto_ritiro 
+from pianta p
+inner join pianta_ordine po on p.id = po.id_pianta 
+inner join ordine o on po.id_ordine = o.id 
+inner join utente u on o.id_user = u.id 
+where 1=1
+
+
+--getOrder
+select *
+from ordine o 
+where o.id="+ id
+
+--modifyOrderStatus
+update pianteria.ordine  SET stato = "+ stato +"  WHERE o.id = "+ id
+
+  },
+  
+  
+    Ordine_fornitore: {
+--getArchiveOrderFornitore
+select f.id, f.nome, f.email, f.telefono, r.id, r.quantità, r.data_ordine, r.data_arrivo, r.id_pianta, r.id_fornitore, r.id_user  
+from fornitore f
+inner join rifornimento r on f.id = r.id_fornitore
+inner join pianta p on r.id_pianta = p.id 
+inner join pianta_ordine po on p.id = po.id_pianta 
+where 1=1
+
+--getOrderFornitore
+select *
+from fornitore f 
+where f.id = "+ id
+
+--createOrderForitore
+insert into ordine(id, id_user, data_acquisto, data_ritiro, id_punto_ritiro, stato)
+values("+ id +"," + id_user +","+ data_acquisto +","+ data_ritiro +","+ id_punto_ritiro +","+ stato +")";
+
+
+
+--modifyOrderFornitoreStatus
+update pianteria.ordine  SET stato = "+ stato +"  WHERE o.id = "+ id
+
+
+  },
+  
+    Adozione: {
+ --getArchiveAdozione
+ select a.id, a.id_pianta,a.id_user,a.quantity,a.punto_ritiro, u.id, u.username, u.email, o.id, o.id_punto_ritiro 
+ from punto_ritiro pr 
+ inner join ordine o on pr.id = o.id_punto_ritiro 
+ inner join pianta_ordine po on o.id = po.id_ordine 
+ inner join pianta p on po.id_pianta = p.id 
+ inner join adozioni a on p.id = a.id_pianta 
+ inner join utente u on a.id_user = u.id 
+ where 1=1
+    
+--getAdozione
+select *
+from adozioni a 
+where a.id = "+ id
+  },
+  
+   Punto_ritiro: {
+--getArchivePuntoRitiro
+select pr.id, pr.nome, pr.indirizzo, u.id, u.username, u.email, o.id, o.data_acquisto, o.data_ritiro, o.stato 
+from utente u
+inner join adozioni a on u.id = a.id_user 
+inner join pianta p on a.id_pianta = p.id 
+inner join pianta_ordine po on p.id = po.id_pianta 
+inner join ordine o on po.id_ordine = o.id 
+inner join punto_ritiro pr on o.id_punto_ritiro = pr.id 
+where 1=1
+
+
+--getPuntoRitiro
+select*
+from punto_ritiro pr 
+where pr.id = "+ id
+
+  },
+  
+  Fornitore: {
+--getArchiveFornitore
+select f.id, f.nome, f.email, f.telefono 
+from fornitore f 
+where 1=1
+
+--getFornitore
+select f.id, f.nome, f.email, f.telefono 
+from fornitore f 
+where f.id= "+ id 
+
+  },
+  
+ Utente: {
+--login
+
+select *
+from utente u
+where u.email = "+ email +" and u.password = "+ password
+
+--registra
+
+insert into ordine(id, username, email, password, livello_permessi)
+values("+ id +"," + username +","+ email +","+ password +","+ livello_permessi +")";
+
+  }
+  
+  
+  
