@@ -51,7 +51,7 @@ class Utente
 
     public function getUtente($id_utente)
     {
-        $sql = "SELECT u.username, u.email
+        $sql = "SELECT *
             FROM utente u
             WHERE u.id = :id_utente";
 
@@ -63,22 +63,32 @@ class Utente
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function resetPassword($id_utente,$date)
+    public function resetPassword($id_utente, $password_utente)
     {
-        // Generazione della password randomica
-        $password = bin2hex(openssl_random_pseudo_bytes(4));
+        $sql = "SELECT *
+            FROM utente u
+            WHERE u.id = :id_utente";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id_utente', $id_utente, PDO::PARAM_INT);
+
+        $stmt->execute();
+        $utente = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if($utente["livello_permessi"] != 2)
+        {
+            return 3;
+        }
 
         $sql = "UPDATE utente
-        SET password = :password
+        SET `password` = :password_utente
         WHERE id = :id_utente";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':id_utente', $id_utente, PDO::PARAM_INT);
-        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+        $stmt->bindValue(':password_utente', $password_utente, PDO::PARAM_STR);
 
-        $stmt->execute();
-
-        return $password;
+        return $stmt->execute();
     }
 
     
