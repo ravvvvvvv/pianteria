@@ -1,8 +1,10 @@
-function adoptions()
+function Adoptions()
 {
     return(
-        <></>
+        <>
+        <h1>Adozioni</h1>
+        </>
     );
 }
 
-export default adoptions;
+export default Adoptions;

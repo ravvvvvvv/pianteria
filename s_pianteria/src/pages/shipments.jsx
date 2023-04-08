@@ -1,9 +1,10 @@
-function shipments()
+function Shipments()
 {
     return(
         <>
+        <h1>Spedizioni</h1>
         </>
     );
 }
 
-export default shipments;
+export default Shipments;

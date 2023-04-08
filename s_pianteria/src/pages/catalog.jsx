@@ -1,8 +1,8 @@
-function catalog()
+function Catalog()
 {
     return(
-        <></>
+        <><h1>Catalogo</h1></>
     );
 }
 
-export default catalog;
+export default Catalog;

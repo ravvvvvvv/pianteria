@@ -1,8 +1,8 @@
-function orders()
+function Orders()
 {
     return(
-        <></>
+        <><h1>Ordini</h1></>
     );
 }
 
-export default orders;
+export default Orders;

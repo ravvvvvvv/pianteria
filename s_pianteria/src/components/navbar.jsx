@@ -11,6 +11,18 @@ function NavBar() {
                     </div>
                 </a>
                 <div>
+                    <CustomLink href={'/catalog'}>Catalogo</CustomLink>
+                </div>
+                <div>
+                    <CustomLink href={'/orders'}>Ordini</CustomLink>
+                </div>
+                <div>
+                    <CustomLink href={'/adoptions'}>Adozioni</CustomLink>
+                </div>
+                <div>
+                    <CustomLink href={'/user_details'}>Utente</CustomLink>
+                </div>
+                <div>
                     <CustomLink href={'/pianta'}>Piante</CustomLink>
                 </div>
             </nav>

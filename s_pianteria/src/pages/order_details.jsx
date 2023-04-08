@@ -1,7 +1,7 @@
-function order_details(){
+function Order_Details(){
     return(
-        <></>
+        <><h1>Dettagli Ordine</h1></>
     );
 }
 
-export default order_details;
+export default Order_Details;
