@@ -1,15 +1,11 @@
 
  piante: {
 --getArchivePianta
-select p.id as pid, p.nome as nome_pianta, p.prezzo as prezzo, p.fiore, p.nome_scientifico as nome_scientifico, p.colore1 as colore_1, p.colore2 as colore_2, p.quantità as quantity, p.adottabile as adottabilità, p.prezzo_adozione as prezzo_adozione, p.inizio_raccolto as raccolto_data_inizio, p.fine_raccolto as raccolto_data_fine, p.stato_pianta as stato_pianta
-        FROM pianta p
-        WHERE 1=1 
+SELECT * FROM pianta p WHERE 1=1
         ORDER BY p.nome DESC;
         
 --getPianta
-SELECT *
-FROM pianta p 
-WHERE p.id = "+ id
+SELECT * FROM pianta p WHERE p.id = :id_pianta
 
 
 --createPianta
@@ -18,14 +14,18 @@ values("+ id + "," + nome +"," + nome_scientifico +"," + fiore +","+ colore1 +",
 
 
 --modifyPianta
+
 UPDATE pianta 
-set id = "+ id +", nome = "+ nome +", nome_scientifico = "+ nome_scientifico +", fiore = "+ fiore+ ", colore1 = "+ colore1 +" , colore2 = "+ colore2 +", prezzo = "+ prezzo +", quantità = "+ quantità +", adottabile = "+ adottabile +", prezzo_adozione = "+ prezzo_adozione +", inizio_raccolto = "+ inizio_raccolto +", fine_raccolto = "+ fine_raccolto +" 
-where id = "+ id
+set nome = :nome, nome_scientifico = :nome_scientifico, fiore = :fiore, colore1 = :colore1, 
+colore2 = :colore2, prezzo = :prezzo, quantità = :quantita, adottabile = :adottabile, 
+prezzo_adozione = :prezzo_adozione, inizio_raccolto = :inizio_raccolto, fine_raccolto = :fine_raccolto,
+stato_pianta = :stato_pianta
 
 --deactivatePianta
+
 UPDATE pianta p
-SET stato_pianta = 0
-where p.id = "+ i
+SET stato_pianta = :active
+where p.id = :id_pianta
 
 
 }
@@ -33,53 +33,45 @@ where p.id = "+ i
  Ordine: {
  
 --getArchiveOrder
-select u.username,u.id, o.id, o.id_user, o.data_acquisto, o.data_ritiro, o.id_punto_ritiro 
-from pianta p
-inner join pianta_ordine po on p.id = po.id_pianta 
-inner join ordine o on po.id_ordine = o.id 
-inner join utente u on o.id_user = u.id 
-where 1=1
+SELECT * FROM ordine WHERE 1=1
 
 
 --getOrder
-select *
-from ordine o 
-where o.id="+ id
+SELECT * FROM ordine WHERE id = :id_ordine
 
 --modifyOrderStatus
-update pianteria.ordine  SET stato = "+ stato +"  WHERE o.id = "+ id
+
+UPDATE ordine
+SET stato = :stato
+WHERE id = :id_ordine
 
   },
   
   
-    Ordine_fornitore: {
---getArchiveOrderFornitore
-select f.id, f.nome, f.email, f.telefono, r.id, r.quantità, r.data_ordine, r.data_arrivo, r.id_pianta, r.id_fornitore, r.id_user  
-from fornitore f
-inner join rifornimento r on f.id = r.id_fornitore
-inner join pianta p on r.id_pianta = p.id 
-inner join pianta_ordine po on p.id = po.id_pianta 
-where 1=1
+    Rifornimento: {
+--getArchiveRifornimento
 
---getOrderFornitore
-select *
-from fornitore f 
-where f.id = "+ id
+SELECT * FROM rifornimento WHERE 1=1
 
---createOrderForitore
-insert into ordine(id, id_user, data_acquisto, data_ritiro, id_punto_ritiro, stato)
-values("+ id +"," + id_user +","+ data_acquisto +","+ data_ritiro +","+ id_punto_ritiro +","+ stato +")";
+--getRifornimento
+
+SELECT * FROM rifornimento WHERE id = :id_rifornimento
+
+--createRifornimento
+INSERT INTO rifornimento (id_pianta, id_fornitore, quantità, data_ordine, data_arrivo, id_user)
+VALUES (:id_pianta, :id_fornitore, :quantita, :data_ordine, :data_arrivo, :id_user)
 
 
 
---modifyOrderFornitoreStatus
-update pianteria.ordine  SET stato = "+ stato +"  WHERE o.id = "+ id
+--modifyFornitoreStatus
+update ordine  SET stato = :stato  WHERE o.id = :id_rifornimento
 
 
   },
   
     Adozione: {
  --getArchiveAdozione
+ 
  select a.id, a.id_pianta,a.id_user,a.quantity,a.punto_ritiro, u.id, u.username, u.email, o.id, o.id_punto_ritiro 
  from punto_ritiro pr 
  inner join ordine o on pr.id = o.id_punto_ritiro 
@@ -90,9 +82,11 @@ update pianteria.ordine  SET stato = "+ stato +"  WHERE o.id = "+ id
  where 1=1
     
 --getAdozione
-select *
+
+SELECT *
 from adozioni a 
-where a.id = "+ id
+where a.id = :id_adozione
+
   },
   
    Punto_ritiro: {
@@ -108,36 +102,76 @@ where 1=1
 
 
 --getPuntoRitiro
-select*
-from punto_ritiro pr 
-where pr.id = "+ id
+
+SELECT *
+FROM punto_ritiro pr 
+WHERE pr.id = :id_punto_ritiro
 
   },
   
   Fornitore: {
 --getArchiveFornitore
-select f.id, f.nome, f.email, f.telefono 
-from fornitore f 
+
+SELECT f.id, f.nome, f.email, f.telefono, r.id, r.quantità, r.data_ordine, r.data_arrivo, r.id_pianta, r.id_fornitore, r.id_user  
+from fornitore f
+inner join rifornimento r on f.id = r.id_fornitore
+inner join pianta p on r.id_pianta = p.id 
+inner join pianta_ordine po on p.id = po.id_pianta 
 where 1=1
 
 --getFornitore
-select f.id, f.nome, f.email, f.telefono 
+
+SELECT f.id, f.nome, f.email, f.telefono 
 from fornitore f 
-where f.id= "+ id 
+where f.id = :id_fornitore
+
+--modifyFornitore
+
+UPDATE fornitore 
+set nome = :nome, email = :email, telefono = :telefono, stato = :stato
+where id = :id_fornitore
+
+--createFornitore
+
+INSERT into fornitore(id, nome, email, telefono)
+values( :id, :nome, :email, :telefono)
+
+--modifyActiveFornitore
+
+UPDATE fornitore f
+SET stato = :active
+where f.id = :id_fornitore
 
   },
   
  Utente: {
 --login
 
-select *
+SELECT *
 from utente u
-where u.email = "+ email +" and u.password = "+ password
+where u.email =  :email  and `password` =  :password_user
+
+--deleteUtente
+
+DELETE FROM Utente 
+WHERE  id = :id_utente
+
+--getUtente
+
+SELECT *
+FROM utente u
+WHERE u.id = :id_utente
+
+--resetPassword
+
+UPDATE utente
+SET `password` = :password_utente
+WHERE id = :id_utente
 
 --registra
 
-insert into ordine(id, username, email, password, livello_permessi)
-values("+ id +"," + username +","+ email +","+ password +","+ livello_permessi +")";
+INSERT into ordine(id, username, email, `password`, livello_permessi)
+values( :id, :username, :email, :`password`, :livello_permessi)
 
   }
   
