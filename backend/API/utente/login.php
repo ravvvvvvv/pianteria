@@ -1,12 +1,4 @@
 <?php
-
-spl_autoload_register(function ($class) {
-    require __DIR__ . "/../../COMMON/$class.php";
-});
-
-set_exception_handler("errorHandler::handleException");
-set_error_handler("errorHandler::handleError");
-
 require __DIR__ . '/../../MODEL/Utente.php';
 header("Content-type: application/json; charset=UTF-8");
 header('Access-Control-Allow-Origin: *');
