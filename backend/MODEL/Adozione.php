@@ -1,4 +1,4 @@
-<?php
+	<?php
 spl_autoload_register(function ($class) {
     require __DIR__ . "/../COMMON/$class.php";
 });
@@ -18,25 +18,24 @@ class Adozione
     }
 
     public function getArchiveAdozione(){
-        $sql = "SELECT a.id, a.id_pianta,a.id_user,a.quantity,a.punto_ritiro, u.id, u.username, u.email, o.id, o.id_punto_ritiro 
-        from punto_ritiro pr 
-        inner join ordine o on pr.id = o.id_punto_ritiro 
-        inner join pianta_ordine po on o.id = po.id_ordine 
-        inner join pianta p on po.id_pianta = p.id 
-        inner join adozioni a on p.id = a.id_pianta 
-        inner join utente u on a.id_user = u.id 
-        where 1=1";
+        $sql = "SELECT adozioni.id, pianta.nome, pianta.nome_scientifico, stagione.nome as stagione, (adozioni.quantity * pianta.prezzo) as costo, pianta.fiore
+				FROM pianta
+				INNER JOIN adozioni ON adozioni.id_pianta = pianta.id 
+				INNER JOIN stagione ON stagione.id = pianta.id_stagione ";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAdozione($id_adozione) {
-        $sql = "SELECT *
-        from adozioni a 
-        where a.id = :id_adozione";
+        $sql = "SELECT pianta.fiore, utente.username, utente.email, pianta.stato_pianta, pianta.inizio_raccolto, punto_ritiro.nome as punto_ritiro, punto_ritiro.indirizzo, pianta.nome, adozioni.quantity as quantità, (adozioni.quantity * pianta.prezzo) as costo 
+        from adozioni
+        inner join pianta on pianta.id = adozioni.id_pianta
+        inner join utente on utente.id = adozioni.id_user
+        inner join punto_ritiro on punto_ritiro.id = adozioni.punto_ritiro
+        where adozioni.id = :id_adozioni";
         $stmt = $this->conn->prepare($sql);
-        $stmt->BindValue(":id_adozione",$id_adozione,PDO::PARAM_INT);
+        $stmt->BindValue(":id_adozioni",$id_adozione,PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
