@@ -21,9 +21,9 @@ class Utente
 
     public function login($email, $password)
     {
-        $sql = "SELECT *
+        $sql = "SELECT u.id
         from utente u
-        where u.email =  :email  and `password` =  :password_user";
+        where u.email =  :email  and `password` =  :password_user AND active = 1";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
@@ -40,8 +40,9 @@ class Utente
         if ($utente == null)
             return false;
 
-        $sql = "DELETE FROM Utente 
-        WHERE  id = :id_utente";
+        $sql = "UPDATE utente
+        		SET active = 2
+                WHERE id = :id_utente";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':id_utente', $id_utente, PDO::PARAM_INT);
