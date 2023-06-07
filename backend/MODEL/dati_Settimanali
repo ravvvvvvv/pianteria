@@ -1,0 +1,100 @@
+<?php
+spl_autoload_register(function ($class) {
+    require __DIR__ . "/../COMMON/$class.php";
+});
+
+set_exception_handler("errorHandler::handleException");
+set_error_handler("errorHandler::handleError");
+
+class DatiSettimanali
+{
+    private PDO $conn;
+    private Connect $db;
+
+    public function __construct() //Si connette al DB.
+    {
+        $this->db = new Connect;
+        $this->conn = $this->db->getConnection();
+    }
+
+    public function getOrdini($data_attuale) {
+        $sql = "SELECT count(id) as ordini
+                FROM ordine o
+                WHERE to_days(o.data_acquisto) >= to_days(:data_attuale) -7";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":data_attuale",$data_attuale,PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getGuadagno($data_attuale) {
+        $sql = "SELECT sum(x.quantità * p.prezzo) as guadagno
+                from (SELECT po.quantità as quantità, po.id_pianta as id_pianta
+                    FROM ordine o
+                    INNER JOIN pianta_ordine po on po.id_ordine = o.id
+                    WHERE to_days(o.data_acquisto) >= to_days(:data_attuale) -7) x
+                INNER JOIN pianta p on id = x.id_pianta
+                WHERE 1 = 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":data_attuale",$data_attuale,PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getDatiPiante($data_attuale) {
+        $result = array();
+        //Piante ordinate in primavera
+        $sqlPrimavera = "SELECT count(p.id) * po.quantità as piante
+                FROM ordine o
+                INNER JOIN pianta_ordine po on po.id_ordine = o.id
+                INNER JOIN pianta p on p.id = po.id_Pianta
+                WHERE to_days(o.data_acquisto) >= to_days(:data_attuale) -7 AND p.id_stagione = 2";
+        //Piante ordinate in estate
+        $sqlEstate = "SELECT count(p.id) * po.quantità as piante
+                FROM ordine o
+                INNER JOIN pianta_ordine po on po.id_ordine = o.id
+                INNER JOIN pianta p on p.id = po.id_Pianta
+                WHERE to_days(o.data_acquisto) >= to_days(:data_attuale) -7 AND p.id_stagione = 3";
+        //Piante ordinate in autunno
+        $sqlAutunno = "SELECT count(p.id) * po.quantità as piante
+                FROM ordine o
+                INNER JOIN pianta_ordine po on po.id_ordine = o.id
+                INNER JOIN pianta p on p.id = po.id_Pianta
+                WHERE to_days(o.data_acquisto) >= to_days(:data_attuale) -7 AND p.id_stagione = 4";
+        //Piante ordinate in inverno
+        $sqlInverno = "SELECT count(p.id) * po.quantità as piante
+                FROM ordine o
+                INNER JOIN pianta_ordine po on po.id_ordine = o.id
+                INNER JOIN pianta p on p.id = po.id_Pianta
+                WHERE to_days(o.data_acquisto) >= to_days(:data_attuale) -7 AND p.id_stagione = 1";
+
+        //Primavera
+        $stmt = $this->conn->prepare($sqlPrimavera);
+        $stmt->bindValue("data_attuale",$data_attuale,PDO::PARAM_STR);
+        $stmt->execute();
+        $result["primavera"] = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //Estate
+        $stmt = $this->conn->prepare($sqlEstate);
+        $stmt->bindValue("data_attuale",$data_attuale,PDO::PARAM_STR);
+        $stmt->execute();
+        $result["estate"] = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //Autunno
+        $stmt = $this->conn->prepare($sqlAutunno);
+        $stmt->bindValue("data_attuale",$data_attuale,PDO::PARAM_STR);
+        $stmt->execute();
+        $result["autunno"] = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //Inverno
+        $stmt = $this->conn->prepare($sqlInverno);
+        $stmt->bindValue("data_attuale",$data_attuale,PDO::PARAM_STR);
+        $stmt->execute();
+        $result["inverno"] = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+}
