@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Origin');
 
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
-if(empty($parts[6])){
+if(empty($parts[5])){
     http_response_code(404);
     echo json_encode(["message" => "Insert a valid ID"]);
     exit();
@@ -14,7 +14,7 @@ if(empty($parts[6])){
 
 $fornitore = new Fornitore();
 
-$result = $fornitore->getFornitore($parts[6]);
+$result = $fornitore->getFornitore($parts[5]);
 
 if ($result != false) {
     echo json_encode($result);
