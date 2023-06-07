@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Origin');
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
-if(empty($parts[4])){
+if(empty($parts[5])){
     http_response_code(404);
     echo json_encode(["message" => "Insert a valid ID"]);
     exit();
